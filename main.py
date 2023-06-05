@@ -28,6 +28,20 @@ dialog = {
 
 
 # --------------- bot -------------------
+# Функція-обробник вхідного повідомлення
+def handle_video(update, context):
+    # Отримуємо вхідне повідомлення
+    video_message = update.message.video
+
+    # Відправляємо отримане відео як відео-повідомлення
+    update.message.reply_video(video_message.file_id)
+
+# Функція для обробки помилок
+def error(update, context):
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
+
+
+
 @bot.message_handler(commands=['help', 'start'])
 def say_welcome(message):
     logger.info(f'</code>@{message.from_user.username}<code> ({message.chat.id}) used /start or /help')
